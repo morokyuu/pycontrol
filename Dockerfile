@@ -5,6 +5,9 @@
 #
 # python ftp
 # https://www.python.org/ftp/python/
+#
+# book
+# https://y373.sakura.ne.jp/minami/pyctrl
 
 FROM ubuntu:22.04
 
@@ -17,15 +20,14 @@ RUN ln -sf /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
 RUN apt update -y && apt install -y \
     vim-gtk3 git wget curl cmake build-essential
 
-RUN apt install -y \
-    https://www.python.org/ftp/python/3.13.0/Python-3.13.0a1.tgz \
-    && tar -xf Python-3.13.0a1.tgz \
-    && cd Python-3.13.0a1.tgz \
+RUN wget https://www.python.org/ftp/python/3.13.0/Python-3.13.0a1.tgz \
+    && tar xvfz Python-3.13.0a1.tgz \
+    && cd Python-3.13.0a1 \
     && ./configure --enable-optimizations \
     && make && make install
 
 ## pip list install
 ## https://pip.pypa.io/en/latest/user_guide/#requirements-files
-RUN cd /pycontrol \
-    && python -m pip install -r requirements.txt
+#RUN cd /pycontrol \
+#    && python -m pip install -r requirements.txt
 
